@@ -1,7 +1,7 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+/*import { Link, createFileRoute } from "@tanstack/react-router";*/
 import { Bold } from "lucide-react";
 import { useEffect, useState } from "react";
-
+import { Link, createFileRoute } from "@tanstack/react-router";
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
@@ -713,24 +713,24 @@ function Index() {
       <footer className="mx-auto max-w-7xl px-4 sm:px-6 py-10 sm:py-12 border-t border-brand-secondary/5 text-brand-secondary/40 text-xs flex flex-col sm:flex-row gap-4 justify-between items-center text-center sm:text-left">
         <p>{t.footer.copy}</p>
         <div className="flex gap-6">
-          <a href="#" className="hover:text-brand-secondary">
-            {t.footer.privacy}
-          </a>
-          <a href="#" className="hover:text-brand-secondary">
+          <Link to="/securitySettings" className="hover:text-brand-secondary">
             {t.footer.security}
-          </a>
-          <a href="#" className="hover:text-brand-secondary">
+          </Link>
+          <Link to="/privacyPolicy" className="hover:text-brand-secondary">
+            {t.footer.privacy}
+          </Link>
+          <Link to="/systemStatus" className="hover:text-brand-secondary">
             {t.footer.status}
-          </a>
-          <a href="#" className="hover:text-brand-secondary">
+          </Link>
+          <Link to="/contacts" className="hover:text-brand-secondary">
             {t.footer.contact}
-          </a>
-          <a href="#" className="hover:text-brand-secondary">
+          </Link>
+          <Link to="/supports" className="hover:text-brand-secondary">
             {t.footer.support}
-          </a>
-          <a href="#" className="hover:text-brand-secondary">
+          </Link>
+          <Link to="/faq" className="hover:text-brand-secondary">
             {t.footer.FAQ}
-          </a>
+          </Link>
         </div>
       </footer>
     </div>
