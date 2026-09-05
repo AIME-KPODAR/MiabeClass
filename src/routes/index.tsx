@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { Bold } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export const Route = createFileRoute("/")({
@@ -21,21 +22,22 @@ const T = {
   en: {
     nav: {
       dashboard: "Dashboard",
-      institutions: "Institutions",
-      records: "Academic Records",
+      institutions: "Teacher",
+      records: "Courses",
       fees: "Fee Management",
+      notif: "Notifications",
     },
     hero: {
-      school: "St. Andrews International",
+      school: "MiabeClass",
       term: "Academic Year 2023/2024 • Term 2",
-      report: "Generate Report",
-      enroll: "New Enrollment",
+      report: "New Enrollment Teacher",
+      enroll: "New Enrollment Student",
     },
     stats: {
       students: "Total Students",
       teachers: "Teacher Attendance",
       stable: "Stable",
-      fees: "Fee Collection",
+      fees: "Testimony",
       target: "72% Target",
       requests: "Open Requests",
       tickets: "Parent Tickets",
@@ -58,6 +60,14 @@ const T = {
         title: "World Literature: 19th Century",
         meta: "Grade 10 • Elena Rodriguez",
       },
+      c4: {
+        title: "Advanced Chimie",
+        meta: "Grade 12 • Dr. TONE Jonas",
+      },
+      c5: {
+        title: "Geometrics Principles",
+        meta: "Troisième • Prof. KPODAR Aimé",
+      },
     },
     analytics: {
       title: "Institutional Performance Analytics",
@@ -75,11 +85,11 @@ const T = {
       broadcast: "Broadcasting System",
     },
     fees: {
-      title: "Fee Collection Status",
-      pending: "$12,400 pending this month",
-      tuition: "Tuition Fee - Leo Vance",
-      library: "Library Fund - Maya Ito",
-      receipt: (n: string) => `Receipt #${n}`,
+      title: "Testimony Status",
+      pending: "12,400 pending this month",
+      tuition: "Courses Testimony - Leo Vance",
+      library: "Library Testimony - Maya Ito",
+      receipt: (n: string) => `Receipt n°${n}`,
     },
     quick: {
       library: "Digital Library",
@@ -92,26 +102,30 @@ const T = {
       privacy: "Privacy Policy",
       security: "Security Settings",
       status: "System Status",
+      contact: "Contacts",
+      support: "Supports",
+      FAQ: "FAQ",
     },
   },
   fr: {
     nav: {
       dashboard: "Tableau de bord",
-      institutions: "Établissements",
-      records: "Dossiers scolaires",
+      institutions: "Enseignant(e)",
+      records: "Cours",
       fees: "Gestion des frais",
+      notif: "Notifications",
     },
     hero: {
-      school: "St. Andrews International",
+      school: "MiabeClass",
       term: "Année scolaire 2023/2024 • Trimestre 2",
-      report: "Générer un rapport",
-      enroll: "Nouvelle inscription",
+      report: "Nouvelle inscription Enseignant(e)",
+      enroll: "Nouvelle inscription Elève",
     },
     stats: {
       students: "Total des élèves",
       teachers: "Présence enseignants",
       stable: "Stable",
-      fees: "Encaissement des frais",
+      fees: "Témoignages",
       target: "72 % de l'objectif",
       requests: "Demandes ouvertes",
       tickets: "Tickets parents",
@@ -134,6 +148,14 @@ const T = {
         title: "Littérature mondiale : XIXᵉ siècle",
         meta: "Seconde • Elena Rodriguez",
       },
+      c4: {
+        title: "Chimie Avancée ",
+        meta: "Grade 12 • Dr. TONE Jonas",
+      },
+      c5: {
+        title: "Principes Géométriques",
+        meta: "Troisième • Prof. KPODAR Aimé",
+      },
     },
     analytics: {
       title: "Analyses de performance de l'établissement",
@@ -143,8 +165,7 @@ const T = {
     notices: {
       title: "Avis récents de l'école",
       urgent: "Urgent",
-      urgentMsg:
-        "Réunion parents-enseignants reportée au vendredi 12 octobre.",
+      urgentMsg: "Réunion parents-enseignants reportée au vendredi 12 octobre.",
       event: "Événement",
       eventMsg:
         "Inscriptions à la Foire annuelle des sciences ouvertes pour la 6ᵉ à la Terminale.",
@@ -153,10 +174,10 @@ const T = {
       broadcast: "Système de diffusion",
     },
     fees: {
-      title: "État de l'encaissement des frais",
-      pending: "12 400 $ en attente ce mois-ci",
-      tuition: "Frais de scolarité - Leo Vance",
-      library: "Fonds de bibliothèque - Maya Ito",
+      title: "État des témoignages",
+      pending: "12 400  en attente ce mois-ci",
+      tuition: "Témoignage des coures - Leo Vance",
+      library: "Témoignage de la bibliothèque - Maya Ito",
       receipt: (n: string) => `Reçu n°${n}`,
     },
     quick: {
@@ -170,6 +191,9 @@ const T = {
       privacy: "Politique de confidentialité",
       security: "Paramètres de sécurité",
       status: "État du système",
+      contact: "Contacts",
+      support: "Supports",
+      FAQ: "FAQ",
     },
   },
 } as const;
@@ -390,12 +414,30 @@ function ThemeToggle({
       className="h-9 w-9 rounded-lg border border-brand-secondary/10 bg-white grid place-items-center text-brand-secondary hover:text-brand-primary transition-colors"
     >
       {isDark ? (
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
           <circle cx="12" cy="12" r="4" />
           <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
         </svg>
       ) : (
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
         </svg>
       )}
@@ -426,40 +468,63 @@ function Index() {
             <a href="#dashboard" className="text-brand-primary">
               {t.nav.dashboard}
             </a>
-            <a href="#courses" className="hover:text-brand-primary transition-colors">
+            <a
+              href="#courses"
+              className="hover:text-brand-primary transition-colors"
+            >
               {t.nav.institutions}
             </a>
-            <a href="#analytics" className="hover:text-brand-primary transition-colors">
+            <a
+              href="#analytics"
+              className="hover:text-brand-primary transition-colors"
+            >
               {t.nav.records}
             </a>
-            <a href="#fees" className="hover:text-brand-primary transition-colors">
+            <a
+              href="#fees"
+              className="hover:text-brand-primary transition-colors"
+            >
               {t.nav.fees}
+            </a>
+            <a
+              href="#notif"
+              className="hover:text-brand-primary transition-colors"
+            >
+              {t.nav.notif}
             </a>
           </div>
           <div className="flex shrink-0 items-center gap-2 sm:gap-3">
             <ThemeToggle theme={theme} setTheme={setTheme} />
             <LangToggle lang={lang} setLang={setLang} />
             <div className="hidden sm:grid size-10 shrink-0 overflow-hidden rounded-full border border-brand-secondary/10 bg-gradient-to-br from-brand-primary/20 to-brand-accent/20 place-items-center font-display font-bold text-brand-secondary text-sm">
-              AV
+              MC
             </div>
           </div>
         </div>
       </nav>
 
-      <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-12" id="dashboard">
+      <main
+        className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-12"
+        id="dashboard"
+      >
         <section className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6 sm:mb-12">
           <div className="min-w-0">
             <h1 className="font-display text-2xl sm:text-4xl font-bold tracking-tight">
               {t.hero.school}
             </h1>
-            <p className="mt-2 text-sm sm:text-base text-brand-secondary/60">{t.hero.term}</p>
+            <p className="mt-2 text-sm sm:text-base text-brand-secondary/60">
+              {t.hero.term}
+            </p>
           </div>
           <div className="flex flex-wrap gap-3">
-            <button className="flex-1 sm:flex-none rounded-xl bg-white px-4 sm:px-5 py-2.5 text-sm font-semibold shadow-sm ring-1 ring-inset ring-brand-secondary/10 hover:bg-slate-50 transition-all">
-              {t.hero.report}
-            </button>
             <Link
-              to="/enrollment"
+              to="/newTeacherEnrollment"
+              className="flex-1 sm:flex-none rounded-xl bg-white px-4 sm:px-5 py-2.5 text-sm font-semibold shadow-sm ring-1 ring-inset ring-brand-secondary/10 hover:bg-slate-50 transition-all"
+            >
+              {t.hero.report}
+            </Link>
+            <Link
+              to="/newStudentEnrollment"
               className="flex-1 sm:flex-none rounded-xl bg-brand-primary px-4 sm:px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-brand-primary/90 transition-all inline-flex items-center justify-center"
             >
               {t.hero.enroll}
@@ -470,8 +535,18 @@ function Index() {
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           <Stat label={t.stats.students} value="1,284" delta="+4.2%" />
           <Stat label={t.stats.teachers} value="98.2%" delta={t.stats.stable} />
-          <Stat label={t.stats.fees} value="$42k" delta={t.stats.target} deltaTone="amber" />
-          <Stat label={t.stats.requests} value="12" delta={t.stats.tickets} deltaTone="muted" />
+          <Stat
+            label={t.stats.fees}
+            value="42k"
+            delta={t.stats.target}
+            deltaTone="amber"
+          />
+          <Stat
+            label={t.stats.requests}
+            value="12"
+            delta={t.stats.tickets}
+            deltaTone="muted"
+          />
         </div>
 
         <div className="mt-10 grid grid-cols-1 gap-8 lg:grid-cols-3">
@@ -479,9 +554,9 @@ function Index() {
             <div className="rounded-2xl border border-brand-secondary/5 bg-white overflow-hidden shadow-sm">
               <div className="flex items-center justify-between border-b border-brand-secondary/5 bg-slate-50/50 px-6 py-4">
                 <h2 className="font-display font-bold">{t.courses.title}</h2>
-                <button className="text-xs font-bold text-brand-primary">
+                <a href="#" className="text-xs font-bold text-brand-primary">
                   {t.courses.viewAll}
-                </button>
+                </a>
               </div>
               <div className="divide-y divide-brand-secondary/5">
                 <CourseRow
@@ -508,10 +583,30 @@ function Index() {
                   meta={t.courses.c3.meta}
                   chips={[{ label: t.courses.resources(8) }]}
                 />
+                <CourseRow
+                  letter="C"
+                  color="bg-yellow-500/10 text-yellow-600"
+                  title={t.courses.c4.title}
+                  meta={t.courses.c4.meta}
+                  chips={[
+                    { label: t.courses.resources(10) },
+                    { label: t.courses.live, tone: "live" },
+                  ]}
+                />
+                <CourseRow
+                  letter="G"
+                  color="bg-green-500/10 text-gris-600"
+                  title={t.courses.c5.title}
+                  meta={t.courses.c5.meta}
+                  chips={[{ label: t.courses.resources(6) }]}
+                />
               </div>
             </div>
 
-            <div className="rounded-2xl border border-brand-secondary/5 bg-white p-6 shadow-sm" id="analytics">
+            <div
+              className="rounded-2xl border border-brand-secondary/5 bg-white p-6 shadow-sm"
+              id="analytics"
+            >
               <div className="mb-6 flex items-center justify-between flex-wrap gap-3">
                 <h2 className="font-display font-bold">{t.analytics.title}</h2>
                 <div className="flex items-center gap-4 text-[10px] font-bold uppercase tracking-widest text-brand-secondary/60">
@@ -531,25 +626,33 @@ function Index() {
 
           <div className="space-y-8">
             <div className="rounded-2xl bg-brand-secondary p-6 text-white">
-              <h2 className="font-display text-lg font-bold">{t.notices.title}</h2>
+              <h2 className="font-display text-lg font-bold">
+                {t.notices.title}
+              </h2>
               <div className="mt-6 space-y-4">
                 <div className="border-l-2 border-brand-primary pl-4">
                   <p className="text-xs font-bold text-brand-primary uppercase tracking-widest">
                     {t.notices.urgent}
                   </p>
-                  <p className="mt-1 text-sm font-medium">{t.notices.urgentMsg}</p>
+                  <p className="mt-1 text-sm font-medium">
+                    {t.notices.urgentMsg}
+                  </p>
                 </div>
                 <div className="border-l-2 border-white/20 pl-4">
                   <p className="text-xs font-bold text-white/40 uppercase tracking-widest">
                     {t.notices.event}
                   </p>
-                  <p className="mt-1 text-sm font-medium">{t.notices.eventMsg}</p>
+                  <p className="mt-1 text-sm font-medium">
+                    {t.notices.eventMsg}
+                  </p>
                 </div>
                 <div className="border-l-2 border-white/20 pl-4">
                   <p className="text-xs font-bold text-white/40 uppercase tracking-widest">
                     {t.notices.holiday}
                   </p>
-                  <p className="mt-1 text-sm font-medium">{t.notices.holidayMsg}</p>
+                  <p className="mt-1 text-sm font-medium">
+                    {t.notices.holidayMsg}
+                  </p>
                 </div>
               </div>
               <button className="mt-6 w-full rounded-xl bg-white/10 py-3 text-xs font-bold uppercase tracking-widest hover:bg-white/20 transition-all">
@@ -557,7 +660,10 @@ function Index() {
               </button>
             </div>
 
-            <div className="rounded-2xl border border-brand-secondary/5 bg-white p-6 shadow-sm" id="fees">
+            <div
+              className="rounded-2xl border border-brand-secondary/5 bg-white p-6 shadow-sm"
+              id="fees"
+            >
               <h2 className="font-display font-bold">{t.fees.title}</h2>
               <div className="mt-6 flex items-center gap-4">
                 <div className="relative flex-1 h-2 rounded-full bg-slate-100">
@@ -565,21 +671,31 @@ function Index() {
                 </div>
                 <span className="text-sm font-bold">72%</span>
               </div>
-              <p className="mt-2 text-xs text-brand-secondary/60">{t.fees.pending}</p>
+              <p className="mt-2 text-xs text-brand-secondary/60">
+                {t.fees.pending}
+              </p>
               <div className="mt-6 space-y-3">
                 <div className="flex items-center justify-between rounded-lg border border-brand-secondary/5 p-3">
                   <div>
                     <p className="text-xs font-bold">{t.fees.tuition}</p>
-                    <p className="text-[10px] text-brand-secondary/50">{t.fees.receipt("8829")}</p>
+                    <p className="text-[10px] text-brand-secondary/50">
+                      {t.fees.receipt("8829")}
+                    </p>
                   </div>
-                  <span className="text-xs font-bold text-brand-accent">+$1,200</span>
+                  <span className="text-xs font-bold text-brand-accent">
+                    +1,200k
+                  </span>
                 </div>
                 <div className="flex items-center justify-between rounded-lg border border-brand-secondary/5 p-3">
                   <div>
                     <p className="text-xs font-bold">{t.fees.library}</p>
-                    <p className="text-[10px] text-brand-secondary/50">{t.fees.receipt("8830")}</p>
+                    <p className="text-[10px] text-brand-secondary/50">
+                      {t.fees.receipt("8830")}
+                    </p>
                   </div>
-                  <span className="text-xs font-bold text-brand-accent">+$150</span>
+                  <span className="text-xs font-bold text-brand-accent">
+                    +1,500k
+                  </span>
                 </div>
               </div>
             </div>
@@ -597,9 +713,24 @@ function Index() {
       <footer className="mx-auto max-w-7xl px-4 sm:px-6 py-10 sm:py-12 border-t border-brand-secondary/5 text-brand-secondary/40 text-xs flex flex-col sm:flex-row gap-4 justify-between items-center text-center sm:text-left">
         <p>{t.footer.copy}</p>
         <div className="flex gap-6">
-          <a href="#" className="hover:text-brand-secondary">{t.footer.privacy}</a>
-          <a href="#" className="hover:text-brand-secondary">{t.footer.security}</a>
-          <a href="#" className="hover:text-brand-secondary">{t.footer.status}</a>
+          <a href="#" className="hover:text-brand-secondary">
+            {t.footer.privacy}
+          </a>
+          <a href="#" className="hover:text-brand-secondary">
+            {t.footer.security}
+          </a>
+          <a href="#" className="hover:text-brand-secondary">
+            {t.footer.status}
+          </a>
+          <a href="#" className="hover:text-brand-secondary">
+            {t.footer.contact}
+          </a>
+          <a href="#" className="hover:text-brand-secondary">
+            {t.footer.support}
+          </a>
+          <a href="#" className="hover:text-brand-secondary">
+            {t.footer.FAQ}
+          </a>
         </div>
       </footer>
     </div>

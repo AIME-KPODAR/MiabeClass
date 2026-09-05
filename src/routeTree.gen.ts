@@ -9,12 +9,54 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as EnrollmentRouteImport } from './routes/enrollment'
+import { Route as SystemStatusRouteImport } from './routes/systemStatus'
+import { Route as SupportsRouteImport } from './routes/supports'
+import { Route as SecuritySettingsRouteImport } from './routes/securitySettings'
+import { Route as PrivacyPolicyRouteImport } from './routes/privacyPolicy'
+import { Route as NewTeacherEnrollmentRouteImport } from './routes/newTeacherEnrollment'
+import { Route as NewStudentEnrollmentRouteImport } from './routes/newStudentEnrollment'
+import { Route as FaqRouteImport } from './routes/faq'
+import { Route as ContactsRouteImport } from './routes/contacts'
 import { Route as IndexRouteImport } from './routes/index'
 
-const EnrollmentRoute = EnrollmentRouteImport.update({
-  id: '/enrollment',
-  path: '/enrollment',
+const SystemStatusRoute = SystemStatusRouteImport.update({
+  id: '/systemStatus',
+  path: '/systemStatus',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SupportsRoute = SupportsRouteImport.update({
+  id: '/supports',
+  path: '/supports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SecuritySettingsRoute = SecuritySettingsRouteImport.update({
+  id: '/securitySettings',
+  path: '/securitySettings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
+  id: '/privacyPolicy',
+  path: '/privacyPolicy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewTeacherEnrollmentRoute = NewTeacherEnrollmentRouteImport.update({
+  id: '/newTeacherEnrollment',
+  path: '/newTeacherEnrollment',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewStudentEnrollmentRoute = NewStudentEnrollmentRouteImport.update({
+  id: '/newStudentEnrollment',
+  path: '/newStudentEnrollment',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactsRoute = ContactsRouteImport.update({
+  id: '/contacts',
+  path: '/contacts',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -25,37 +67,142 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/enrollment': typeof EnrollmentRoute
+  '/contacts': typeof ContactsRoute
+  '/faq': typeof FaqRoute
+  '/newStudentEnrollment': typeof NewStudentEnrollmentRoute
+  '/newTeacherEnrollment': typeof NewTeacherEnrollmentRoute
+  '/privacyPolicy': typeof PrivacyPolicyRoute
+  '/securitySettings': typeof SecuritySettingsRoute
+  '/supports': typeof SupportsRoute
+  '/systemStatus': typeof SystemStatusRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/enrollment': typeof EnrollmentRoute
+  '/contacts': typeof ContactsRoute
+  '/faq': typeof FaqRoute
+  '/newStudentEnrollment': typeof NewStudentEnrollmentRoute
+  '/newTeacherEnrollment': typeof NewTeacherEnrollmentRoute
+  '/privacyPolicy': typeof PrivacyPolicyRoute
+  '/securitySettings': typeof SecuritySettingsRoute
+  '/supports': typeof SupportsRoute
+  '/systemStatus': typeof SystemStatusRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/enrollment': typeof EnrollmentRoute
+  '/contacts': typeof ContactsRoute
+  '/faq': typeof FaqRoute
+  '/newStudentEnrollment': typeof NewStudentEnrollmentRoute
+  '/newTeacherEnrollment': typeof NewTeacherEnrollmentRoute
+  '/privacyPolicy': typeof PrivacyPolicyRoute
+  '/securitySettings': typeof SecuritySettingsRoute
+  '/supports': typeof SupportsRoute
+  '/systemStatus': typeof SystemStatusRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/enrollment'
+  fullPaths:
+    | '/'
+    | '/contacts'
+    | '/faq'
+    | '/newStudentEnrollment'
+    | '/newTeacherEnrollment'
+    | '/privacyPolicy'
+    | '/securitySettings'
+    | '/supports'
+    | '/systemStatus'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/enrollment'
-  id: '__root__' | '/' | '/enrollment'
+  to:
+    | '/'
+    | '/contacts'
+    | '/faq'
+    | '/newStudentEnrollment'
+    | '/newTeacherEnrollment'
+    | '/privacyPolicy'
+    | '/securitySettings'
+    | '/supports'
+    | '/systemStatus'
+  id:
+    | '__root__'
+    | '/'
+    | '/contacts'
+    | '/faq'
+    | '/newStudentEnrollment'
+    | '/newTeacherEnrollment'
+    | '/privacyPolicy'
+    | '/securitySettings'
+    | '/supports'
+    | '/systemStatus'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  EnrollmentRoute: typeof EnrollmentRoute
+  ContactsRoute: typeof ContactsRoute
+  FaqRoute: typeof FaqRoute
+  NewStudentEnrollmentRoute: typeof NewStudentEnrollmentRoute
+  NewTeacherEnrollmentRoute: typeof NewTeacherEnrollmentRoute
+  PrivacyPolicyRoute: typeof PrivacyPolicyRoute
+  SecuritySettingsRoute: typeof SecuritySettingsRoute
+  SupportsRoute: typeof SupportsRoute
+  SystemStatusRoute: typeof SystemStatusRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/enrollment': {
-      id: '/enrollment'
-      path: '/enrollment'
-      fullPath: '/enrollment'
-      preLoaderRoute: typeof EnrollmentRouteImport
+    '/systemStatus': {
+      id: '/systemStatus'
+      path: '/systemStatus'
+      fullPath: '/systemStatus'
+      preLoaderRoute: typeof SystemStatusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/supports': {
+      id: '/supports'
+      path: '/supports'
+      fullPath: '/supports'
+      preLoaderRoute: typeof SupportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/securitySettings': {
+      id: '/securitySettings'
+      path: '/securitySettings'
+      fullPath: '/securitySettings'
+      preLoaderRoute: typeof SecuritySettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacyPolicy': {
+      id: '/privacyPolicy'
+      path: '/privacyPolicy'
+      fullPath: '/privacyPolicy'
+      preLoaderRoute: typeof PrivacyPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/newTeacherEnrollment': {
+      id: '/newTeacherEnrollment'
+      path: '/newTeacherEnrollment'
+      fullPath: '/newTeacherEnrollment'
+      preLoaderRoute: typeof NewTeacherEnrollmentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/newStudentEnrollment': {
+      id: '/newStudentEnrollment'
+      path: '/newStudentEnrollment'
+      fullPath: '/newStudentEnrollment'
+      preLoaderRoute: typeof NewStudentEnrollmentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contacts': {
+      id: '/contacts'
+      path: '/contacts'
+      fullPath: '/contacts'
+      preLoaderRoute: typeof ContactsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -70,7 +217,14 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  EnrollmentRoute: EnrollmentRoute,
+  ContactsRoute: ContactsRoute,
+  FaqRoute: FaqRoute,
+  NewStudentEnrollmentRoute: NewStudentEnrollmentRoute,
+  NewTeacherEnrollmentRoute: NewTeacherEnrollmentRoute,
+  PrivacyPolicyRoute: PrivacyPolicyRoute,
+  SecuritySettingsRoute: SecuritySettingsRoute,
+  SupportsRoute: SupportsRoute,
+  SystemStatusRoute: SystemStatusRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

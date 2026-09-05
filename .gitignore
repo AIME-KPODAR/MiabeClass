@@ -1,0 +1,41 @@
+# Dependencies
+node_modules/
+
+# Build / generated files
+dist/
+.output/
+.vite/
+
+# Cloudflare / Wrangler generated files
+.wrangler/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# IDE / editors
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Coverage
+coverage/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Netlify local files
+.netlify/
