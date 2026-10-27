@@ -9,6 +9,8 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TimetableRouteImport } from './routes/timetable'
+import { Route as TeachersRouteImport } from './routes/teachers'
 import { Route as SystemStatusRouteImport } from './routes/systemStatus'
 import { Route as SupportsRouteImport } from './routes/supports'
 import { Route as SecuritySettingsRouteImport } from './routes/securitySettings'
@@ -16,10 +18,25 @@ import { Route as PrivacyPolicyRouteImport } from './routes/privacyPolicy'
 import { Route as NotificationsRouteImport } from './routes/notifications'
 import { Route as NewTeacherEnrollmentRouteImport } from './routes/newTeacherEnrollment'
 import { Route as NewStudentEnrollmentRouteImport } from './routes/newStudentEnrollment'
+import { Route as MessagingRouteImport } from './routes/messaging'
+import { Route as LibraryRouteImport } from './routes/library'
+import { Route as FeesRouteImport } from './routes/fees'
 import { Route as FaqRouteImport } from './routes/faq'
+import { Route as ExamsRouteImport } from './routes/exams'
+import { Route as CoursesRouteImport } from './routes/courses'
 import { Route as ContactsRouteImport } from './routes/contacts'
 import { Route as IndexRouteImport } from './routes/index'
 
+const TimetableRoute = TimetableRouteImport.update({
+  id: '/timetable',
+  path: '/timetable',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TeachersRoute = TeachersRouteImport.update({
+  id: '/teachers',
+  path: '/teachers',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SystemStatusRoute = SystemStatusRouteImport.update({
   id: '/systemStatus',
   path: '/systemStatus',
@@ -55,9 +72,34 @@ const NewStudentEnrollmentRoute = NewStudentEnrollmentRouteImport.update({
   path: '/newStudentEnrollment',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MessagingRoute = MessagingRouteImport.update({
+  id: '/messaging',
+  path: '/messaging',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LibraryRoute = LibraryRouteImport.update({
+  id: '/library',
+  path: '/library',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FeesRoute = FeesRouteImport.update({
+  id: '/fees',
+  path: '/fees',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FaqRoute = FaqRouteImport.update({
   id: '/faq',
   path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExamsRoute = ExamsRouteImport.update({
+  id: '/exams',
+  path: '/exams',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoursesRoute = CoursesRouteImport.update({
+  id: '/courses',
+  path: '/courses',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactsRoute = ContactsRouteImport.update({
@@ -74,7 +116,12 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/contacts': typeof ContactsRoute
+  '/courses': typeof CoursesRoute
+  '/exams': typeof ExamsRoute
   '/faq': typeof FaqRoute
+  '/fees': typeof FeesRoute
+  '/library': typeof LibraryRoute
+  '/messaging': typeof MessagingRoute
   '/newStudentEnrollment': typeof NewStudentEnrollmentRoute
   '/newTeacherEnrollment': typeof NewTeacherEnrollmentRoute
   '/notifications': typeof NotificationsRoute
@@ -82,11 +129,18 @@ export interface FileRoutesByFullPath {
   '/securitySettings': typeof SecuritySettingsRoute
   '/supports': typeof SupportsRoute
   '/systemStatus': typeof SystemStatusRoute
+  '/teachers': typeof TeachersRoute
+  '/timetable': typeof TimetableRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/contacts': typeof ContactsRoute
+  '/courses': typeof CoursesRoute
+  '/exams': typeof ExamsRoute
   '/faq': typeof FaqRoute
+  '/fees': typeof FeesRoute
+  '/library': typeof LibraryRoute
+  '/messaging': typeof MessagingRoute
   '/newStudentEnrollment': typeof NewStudentEnrollmentRoute
   '/newTeacherEnrollment': typeof NewTeacherEnrollmentRoute
   '/notifications': typeof NotificationsRoute
@@ -94,12 +148,19 @@ export interface FileRoutesByTo {
   '/securitySettings': typeof SecuritySettingsRoute
   '/supports': typeof SupportsRoute
   '/systemStatus': typeof SystemStatusRoute
+  '/teachers': typeof TeachersRoute
+  '/timetable': typeof TimetableRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/contacts': typeof ContactsRoute
+  '/courses': typeof CoursesRoute
+  '/exams': typeof ExamsRoute
   '/faq': typeof FaqRoute
+  '/fees': typeof FeesRoute
+  '/library': typeof LibraryRoute
+  '/messaging': typeof MessagingRoute
   '/newStudentEnrollment': typeof NewStudentEnrollmentRoute
   '/newTeacherEnrollment': typeof NewTeacherEnrollmentRoute
   '/notifications': typeof NotificationsRoute
@@ -107,13 +168,20 @@ export interface FileRoutesById {
   '/securitySettings': typeof SecuritySettingsRoute
   '/supports': typeof SupportsRoute
   '/systemStatus': typeof SystemStatusRoute
+  '/teachers': typeof TeachersRoute
+  '/timetable': typeof TimetableRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/contacts'
+    | '/courses'
+    | '/exams'
     | '/faq'
+    | '/fees'
+    | '/library'
+    | '/messaging'
     | '/newStudentEnrollment'
     | '/newTeacherEnrollment'
     | '/notifications'
@@ -121,11 +189,18 @@ export interface FileRouteTypes {
     | '/securitySettings'
     | '/supports'
     | '/systemStatus'
+    | '/teachers'
+    | '/timetable'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/contacts'
+    | '/courses'
+    | '/exams'
     | '/faq'
+    | '/fees'
+    | '/library'
+    | '/messaging'
     | '/newStudentEnrollment'
     | '/newTeacherEnrollment'
     | '/notifications'
@@ -133,11 +208,18 @@ export interface FileRouteTypes {
     | '/securitySettings'
     | '/supports'
     | '/systemStatus'
+    | '/teachers'
+    | '/timetable'
   id:
     | '__root__'
     | '/'
     | '/contacts'
+    | '/courses'
+    | '/exams'
     | '/faq'
+    | '/fees'
+    | '/library'
+    | '/messaging'
     | '/newStudentEnrollment'
     | '/newTeacherEnrollment'
     | '/notifications'
@@ -145,12 +227,19 @@ export interface FileRouteTypes {
     | '/securitySettings'
     | '/supports'
     | '/systemStatus'
+    | '/teachers'
+    | '/timetable'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ContactsRoute: typeof ContactsRoute
+  CoursesRoute: typeof CoursesRoute
+  ExamsRoute: typeof ExamsRoute
   FaqRoute: typeof FaqRoute
+  FeesRoute: typeof FeesRoute
+  LibraryRoute: typeof LibraryRoute
+  MessagingRoute: typeof MessagingRoute
   NewStudentEnrollmentRoute: typeof NewStudentEnrollmentRoute
   NewTeacherEnrollmentRoute: typeof NewTeacherEnrollmentRoute
   NotificationsRoute: typeof NotificationsRoute
@@ -158,10 +247,26 @@ export interface RootRouteChildren {
   SecuritySettingsRoute: typeof SecuritySettingsRoute
   SupportsRoute: typeof SupportsRoute
   SystemStatusRoute: typeof SystemStatusRoute
+  TeachersRoute: typeof TeachersRoute
+  TimetableRoute: typeof TimetableRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/timetable': {
+      id: '/timetable'
+      path: '/timetable'
+      fullPath: '/timetable'
+      preLoaderRoute: typeof TimetableRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/teachers': {
+      id: '/teachers'
+      path: '/teachers'
+      fullPath: '/teachers'
+      preLoaderRoute: typeof TeachersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/systemStatus': {
       id: '/systemStatus'
       path: '/systemStatus'
@@ -211,11 +316,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NewStudentEnrollmentRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/messaging': {
+      id: '/messaging'
+      path: '/messaging'
+      fullPath: '/messaging'
+      preLoaderRoute: typeof MessagingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/library': {
+      id: '/library'
+      path: '/library'
+      fullPath: '/library'
+      preLoaderRoute: typeof LibraryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fees': {
+      id: '/fees'
+      path: '/fees'
+      fullPath: '/fees'
+      preLoaderRoute: typeof FeesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/faq': {
       id: '/faq'
       path: '/faq'
       fullPath: '/faq'
       preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/exams': {
+      id: '/exams'
+      path: '/exams'
+      fullPath: '/exams'
+      preLoaderRoute: typeof ExamsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/courses': {
+      id: '/courses'
+      path: '/courses'
+      fullPath: '/courses'
+      preLoaderRoute: typeof CoursesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contacts': {
@@ -238,7 +378,12 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ContactsRoute: ContactsRoute,
+  CoursesRoute: CoursesRoute,
+  ExamsRoute: ExamsRoute,
   FaqRoute: FaqRoute,
+  FeesRoute: FeesRoute,
+  LibraryRoute: LibraryRoute,
+  MessagingRoute: MessagingRoute,
   NewStudentEnrollmentRoute: NewStudentEnrollmentRoute,
   NewTeacherEnrollmentRoute: NewTeacherEnrollmentRoute,
   NotificationsRoute: NotificationsRoute,
@@ -246,6 +391,8 @@ const rootRouteChildren: RootRouteChildren = {
   SecuritySettingsRoute: SecuritySettingsRoute,
   SupportsRoute: SupportsRoute,
   SystemStatusRoute: SystemStatusRoute,
+  TeachersRoute: TeachersRoute,
+  TimetableRoute: TimetableRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
