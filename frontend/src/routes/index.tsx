@@ -2,6 +2,7 @@ import { Link, createFileRoute, type LinkProps } from "@tanstack/react-router";
 import { BookOpen, CalendarClock, ClipboardCheck, MessageSquare } from "lucide-react";
 
 import { AppShell, Main } from "../components/AppShell";
+import { ImageSlider } from "../components/ImageSlider";
 import { LineChart } from "../components/LineChart";
 import { useApi } from "../lib/api";
 import { demoDashboard, type Dashboard } from "../lib/demo-data";
@@ -228,6 +229,8 @@ function Index() {
             </Link>
           </div>
         </section>
+
+        <ImageSlider lang={lang} />
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           <Stat
