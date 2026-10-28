@@ -13,6 +13,7 @@ import {
   loc,
 } from "../lib/format";
 import { type Lang, tr, usePrefs } from "../lib/prefs";
+import { useCountUp } from "../lib/useCountUp";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -47,11 +48,14 @@ const NOTICE_STYLE = {
 function Stat({
   label,
   value,
+  format,
   delta,
   tone = "accent",
 }: {
   label: string;
-  value: string;
+  /** valeur finale ; le chiffre affiché défile de 0 jusqu'à elle */
+  value: number;
+  format: (n: number) => string;
   delta: string;
   tone?: "accent" | "muted" | "amber" | "red";
 }) {
@@ -61,13 +65,14 @@ function Stat({
     red: "text-red-500",
     muted: "text-brand-secondary/60",
   }[tone];
+  const shown = useCountUp(value);
   return (
     <div className="rounded-2xl border border-brand-secondary/5 bg-white p-6 shadow-sm">
       <span className="text-xs font-bold uppercase tracking-wider text-brand-secondary/40">
         {label}
       </span>
       <div className="mt-2 flex items-baseline gap-2">
-        <span className="text-3xl font-bold">{value}</span>
+        <span className="text-3xl font-bold tabular-nums">{format(shown)}</span>
         <span className={`text-xs font-medium ${toneClass}`}>{delta}</span>
       </div>
     </div>
@@ -153,22 +158,26 @@ function trend(lang: Lang, now: number, prev: number, stableLabel: string) {
 
 function Index() {
   const { lang } = usePrefs();
-  const { data: d, live } = useApi<Dashboard>(
+  const { data: d, live, loading } = useApi<Dashboard>(
     "/dashboard",
     demoDashboard,
     REFRESH_MS,
   );
-  const s = d.stats;
+  // Tant que l'API n'a pas répondu, les compteurs restent à 0 ; ils défilent ensuite jusqu'à la vraie valeur.
+  const s = loading
+    ? { ...d.stats, students: 0, teacherAttendance: 0, testimonies: 0, openRequests: 0 }
+    : d.stats;
 
-  const studentsTrend = trend(lang, s.students, s.studentsPrev, tr(lang, "Stable", "Stable"));
+  const real = d.stats;
+  const studentsTrend = trend(lang, real.students, real.studentsPrev, tr(lang, "Stable", "Stable"));
   // Écart de présence en points (pas en %) pour les enseignants
-  const attDiff = Math.round((s.teacherAttendance - s.teacherAttendancePrev) * 10) / 10;
+  const attDiff = Math.round((real.teacherAttendance - real.teacherAttendancePrev) * 10) / 10;
   const attDelta =
     Math.abs(attDiff) < 0.5
       ? tr(lang, "Stable", "Stable")
       : `${attDiff > 0 ? "+" : ""}${fmtNumber(lang, attDiff)} pt`;
-  const targetPct = s.testimoniesTarget
-    ? Math.round((s.testimonies / s.testimoniesTarget) * 100)
+  const targetPct = real.testimoniesTarget
+    ? Math.round((real.testimonies / real.testimoniesTarget) * 100)
     : 0;
 
   const feesPct = d.fees.expected
@@ -223,25 +232,29 @@ function Index() {
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           <Stat
             label={tr(lang, "Total Students", "Total des élèves")}
-            value={fmtNumber(lang, s.students)}
+            value={s.students}
+            format={(n) => fmtNumber(lang, Math.round(n))}
             delta={studentsTrend.text}
             tone={studentsTrend.tone}
           />
           <Stat
             label={tr(lang, "Teacher Attendance", "Présence enseignants")}
-            value={fmtPercent(lang, s.teacherAttendance)}
+            value={s.teacherAttendance}
+            format={(n) => fmtPercent(lang, Math.round(n * 10) / 10)}
             delta={attDelta}
             tone={attDiff < -0.5 ? "red" : "accent"}
           />
           <Stat
             label={tr(lang, "Testimony", "Témoignages")}
-            value={fmtCompact(lang, s.testimonies)}
+            value={s.testimonies}
+            format={(n) => fmtCompact(lang, Math.round(n))}
             delta={tr(lang, `${targetPct}% Target`, `${targetPct} % de l'objectif`)}
             tone={targetPct >= 100 ? "accent" : "amber"}
           />
           <Stat
             label={tr(lang, "Open Requests", "Demandes ouvertes")}
-            value={fmtNumber(lang, s.openRequests)}
+            value={s.openRequests}
+            format={(n) => fmtNumber(lang, Math.round(n))}
             delta={tr(lang, "Parent Tickets", "Tickets parents")}
             tone="muted"
           />
